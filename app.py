@@ -1,115 +1,184 @@
 import streamlit as st
 
-# Page Configuration
-st.set_page_config(page_title="Rizal Lens: 19th Century Forces", layout="wide", page_icon="👁️")
+# ==========================================
+# PAGE CONFIGURATION & ADVANCED CSS
+# ==========================================
+st.set_page_config(page_title="Rizal Lens: The Ultimate 19th Century Dashboard", layout="wide", page_icon="👁️")
 
-# Main Header
-st.title("👁️ Rizal Lens: The 19th Century Web of Causality")
-st.markdown("An interactive exploration of the macro-events, ideologies, and local struggles that shaped the life, works, and eventual martyrdom of Jose Rizal.")
+st.markdown("""
+    <style>
+    .main-header { font-size: 3rem; color: #1E3A8A; font-weight: 900; letter-spacing: -1px; }
+    .sub-header { font-size: 1.75rem; color: #2563EB; border-bottom: 2px solid #E5E7EB; padding-bottom: 10px; margin-bottom: 20px;}
+    .quote-box { border-left: 6px solid #2563EB; background-color: #EFF6FF; padding: 20px; font-size: 1.1rem; font-style: italic; border-radius: 0px 10px 10px 0px; margin: 20px 0; }
+    .highlight-text { background-color: #FEF08A; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+    .timeline-date { color: #DC2626; font-weight: bold; font-size: 1.2rem; }
+    </style>
+""", unsafe_allow_html=True)
 
-# Sidebar Selector
-st.sidebar.header("Select a Historical Lens")
-lens = st.sidebar.radio(
-    "Choose a perspective to explore:",
-    [
-        "Childhood & Early Life",
-        "Economic Lens", 
-        "Political & Religious Lens", 
-        "Cultural & Educational Lens",
-        "Nationalism & The Final Break"
-    ]
-)
+# ==========================================
+# SIDEBAR NAVIGATION & PROGRESS
+# ==========================================
+st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Jose_Rizal_full.jpg/800px-Jose_Rizal_full.jpg", width=180)
+st.sidebar.title("Rizal Lens Navigation")
+st.sidebar.markdown("A comprehensive digital humanities project mapping the life of Jose Rizal against 19th-century macro-events.")
 
-# ---------------------------------------------------------
-# LENS 1: Childhood & Early Life
-# ---------------------------------------------------------
-if lens == "Childhood & Early Life":
-    st.header("🌱 Childhood and Formative Years")
-    st.write("Jose Rizal was born on June 19, 1861, in Calamba, Laguna. His early environment heavily influenced his lifelong pursuit of knowledge and justice.")
-    
-    st.subheader("Early Precociousness")
-    st.write("Raised by his father, Francisco Mercado, and his mother, Teodora Alonso, Rizal showed immense intellectual capacity at a very young age. He learned the alphabet by age three and wrote his first poem by age five.")
-    
-    st.subheader("The Inquilino Class")
-    st.write("Rizal's family belonged to the *principalia* and functioned as *inquilinos* (leaseholders) on a massive friar estate in Calamba. This upper-middle-class standing provided him the means to pursue an elite education, but it also placed his family at the direct mercy of the Dominican friars who owned the land—a dynamic that would drastically alter his life's trajectory.")
+pages = [
+    "📊 Executive Dashboard",
+    "🌱 Roots & Early Education",
+    "💰 The Economic Crucible", 
+    "⚖️ Politics & The Frailocracy", 
+    "🌴 Romancing Tropicality",
+    "🇵🇭 Master Narratives (The Novels)",
+    "⚔️ Propaganda & Civic Action",
+    "🕊️ Exile, Trial, & Martyrdom"
+]
 
-# ---------------------------------------------------------
-# LENS 2: Economic Lens
-# ---------------------------------------------------------
-elif lens == "Economic Lens":
-    st.header("💰 The Economic Lens: Agrarian Relations and Trade")
+menu = st.sidebar.radio("Select a Module:", pages)
+
+st.sidebar.markdown("---")
+st.sidebar.caption("👨‍💻 Developed by Julian David T. Mercado")
+st.sidebar.caption("📚 Course: RZL110_A28")
+
+# ==========================================
+# 1. EXECUTIVE DASHBOARD
+# ==========================================
+if menu == "📊 Executive Dashboard":
+    st.markdown('<p class="main-header">👁️ Rizal Lens: Executive Dashboard</p>', unsafe_allow_html=True)
+    st.write("This interactive timeline and dashboard completely recontextualizes the 19th-century Philippines. It dispels the myth of a stagnant era and highlights it as a dynamic period of high-speed modernization, agrarian disputes, and the birth of an imagined political community.")
     
-    st.subheader("Global Trade and the Rise of the Middle Class")
-    st.write("The opening of the 103-mile-long Suez Canal connected the Mediterranean to global trade routes, facilitating an influx of progressive ideas and giving rise to a new middle class of Mestizos and Ilustrados in the Philippines.")
+    st.markdown("### 📈 Key Historical Metrics")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Suez Canal Length", "103 Miles", "Opened in 1869")
+    col2.metric("Calamba Sugar Rent (1840s)", "15 pesos", "Per quiñon")
+    col3.metric("Calamba Sugar Rent (1890s)", "30 pesos", "100% Increase", delta_color="inverse")
+    col4.metric("GOMBURZA Execution", "1872", "Sparked Nationalism", delta_color="off")
     
-    st.subheader("The Friar Lands and Hacienda de Calamba")
-    st.write("The friar estates originated from Spanish land grants, but because early Spanish colonizers were unable or unwilling to exploit the lands, religious orders eventually acquired them through donations, purchases, and assumed mortgages.")
+    st.markdown("### 🌍 The Three Great Revolutions")
+    st.write("The 19th century was fundamentally shaped by three global revolutions that eventually penetrated the Philippine landscape:")
+    t1, t2, t3 = st.columns(3)
+    t1.info("**🏭 Industrial Revolution**\nBrought radical technological and socio-economic changes, shrinking the globe via steamships.")
+    t2.success("**⚔️ French Revolution**\nA period of political upheaval that introduced the concepts of liberty, equality, and fraternity.")
+    t3.warning("**📜 American Revolution**\nProved that colonies could successfully rebel against mighty imperial powers.")
+
+# ==========================================
+# 2. ROOTS & EARLY EDUCATION
+# ==========================================
+elif menu == "🌱 Roots & Early Education":
+    st.markdown('<p class="main-header">🌱 Roots & Early Education</p>', unsafe_allow_html=True)
     
-    with st.expander("Explore the Calamba Sugar Economy"):
-        st.write("""
-        * The Hacienda de Calamba was an enclaved economy managed by a corporate religious entity.
-        * The Rizal family was one of the largest leaseholders (*inquilinos*), renting approximately 382 hectares of sugar land and 9.8 hectares of rice land.
-        * Rent for these sugar lands was systematically increased; it doubled from 15 pesos in the 1840s to 30 pesos by the end of the century.
-        * In 1886 and 1887, if annual rent could not be paid due to agricultural crises or rinderpest epidemics, the friar administration doubled the rent for the following year.
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        st.markdown('<p class="sub-header">The Inquilino Family</p>', unsafe_allow_html=True)
+        st.write("Born on June 19, 1861, in Calamba, Laguna, José Protacio Rizal Mercado y Alonso Realonda was born into the *principalia* class. His family were wealthy *inquilinos* (leaseholders) on the Dominican friar estates. This status gave him access to elite education but made his family a direct target of colonial agrarian abuses.")
+        
+        st.markdown('<p class="sub-header">Ateneo Municipal and UST</p>', unsafe_allow_html=True)
+        st.write("Rizal's education was heavily influenced by the Jesuit system at Ateneo Municipal, where he excelled academically and developed his artistic and literary talents. He later transferred to the Dominican-run University of Santo Tomas to study medicine, driven by a desire to cure his mother's failing eyesight. He observed firsthand the stark discrimination between Spanish and native students, catalyzing his eventual departure for Europe in 1882.")
+    
+    with col2:
+        st.error("**The Name 'Rizal'**\nTo avoid association with his outspoken brother Paciano (who was linked to the martyred priest Jose Burgos), Jose adopted the surname 'Rizal', derived from the Spanish word *ricial*, meaning 'green field'.")
+
+# ==========================================
+# 3. THE ECONOMIC CRUCIBLE
+# ==========================================
+elif menu == "💰 The Economic Crucible":
+    st.markdown('<p class="main-header">💰 The Economic Crucible</p>', unsafe_allow_html=True)
+    
+    st.write("The opening of the Suez Canal facilitated global trade, leading to the rise of a new middle class called the *Mestizos* and *Ilustrados*. However, this economic boom exacerbated agrarian tensions.")
+    
+    tab1, tab2 = st.tabs(["🌾 The Hacienda de Calamba", "🔥 The Evictions"])
+    
+    with tab1:
+        st.markdown('<p class="sub-header">Predatory Rent & Friar Lands</p>', unsafe_allow_html=True)
+        st.write("The Hacienda de Calamba was an enclaved economy managed by a corporate religious entity. The Rizal family rented approximately 382 hectares of sugar land and 9.8 hectares of rice land.")
+        st.warning("Rent for a *quiñon* of first-class sugar land skyrocketed from 15 pesos in the 1840s to 30 pesos by the end of the century. If annual rent could not be paid due to agricultural crises or rinderpest epidemics (as in 1886 and 1887), the friar administration mercilessly doubled the rent for the following year.")
+
+    with tab2:
+        st.markdown('<p class="sub-header">The Wrath of Valeriano Weyler</p>', unsafe_allow_html=True)
+        st.write("Governor-General Valeriano Weyler threw his full military prestige behind the Dominicans in Calamba.")
+        st.error("Under his orders, around 400 tenants were brutally evicted, their homes dismantled or burned. 25 individuals, including Rizal's 78-year-old father, were deported to Jolo. This event shattered Rizal's illusions of Spanish justice.")
+
+# ==========================================
+# 4. POLITICS & THE FRAILOCRACY
+# ==========================================
+elif menu == "⚖️ Politics & The Frailocracy":
+    st.markdown('<p class="main-header">⚖️ Politics & The Frailocracy</p>', unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown('<p class="sub-header">The Rule of the Friars</p>', unsafe_allow_html=True)
+        st.write("The union of Church and State in the 19th-century Philippines resulted in the 'Frailocracy'. The friars held immense socio-political power, controlling education, local governance, and vast tracts of land. Their oppressive control over the estates directly cascaded down to the native *inquilinos*.")
+        
+    with col2:
+        st.markdown('<p class="sub-header">The Cavite Mutiny (1872)</p>', unsafe_allow_html=True)
+        st.write("Governor-General Rafael Izquierdo's iron-fisted rule sparked the Cavite Mutiny. The administration used this local uprising to execute three secular priests: Mariano Gomez, Jose Burgos, and Jacinto Zamora (GOMBURZA).")
+        st.info("The martyrdom of GOMBURZA became the generative trauma that awakened the national consciousness.")
+
+# ==========================================
+# 5. ROMANCING TROPICALITY
+# ==========================================
+elif menu == "🌴 Romancing Tropicality":
+    st.markdown('<p class="main-header">🌴 Romancing Tropicality</p>', unsafe_allow_html=True)
+    
+    st.write("Spanish conservatives like Casimiro Herrero argued that the heat of the Torrid Zone caused a 'lamentable predisposition' to indolence. Europe-based *Ilustrados* fought back by actively romanticizing the tropical climate.")
+    
+    with st.expander("🍷 The 1884 Brindis Speech", expanded=True):
+        st.write("During his toast to Luna and Hidalgo, Rizal brilliantly reversed the racist narrative. He claimed that the spectacular, terrible phenomena of tropical nature were actually the generative fount of their creative genius.")
+
+    with st.expander("🥵 The Demon of Comparisons & Indolence", expanded=True):
+        st.write("Upon returning to the Philippines in 1887, Rizal suffered from the intense heat and faced the 'demon of comparisons,' altering his idealized view.")
+        st.markdown('<div class="quote-box">In his essay "Sobre la indolencia de los filipinos", Rizal conceded that the heat naturally encourages rest. However, he powerfully proved that the true cause of exaggerated indolence was the disastrous misgovernance, exploitation, and backwardness inflicted by the colonial state, which destroyed the natives\' incentive to work.</div>', unsafe_allow_html=True)
+
+# ==========================================
+# 6. MASTER NARRATIVES (THE NOVELS)
+# ==========================================
+elif menu == "🇵🇭 Master Narratives (The Novels)":
+    st.markdown('<p class="main-header">🇵🇭 Master Narratives of the Nation</p>', unsafe_allow_html=True)
+    
+    st.write("Theorist Benedict Anderson defines a nation as an 'imagined political community', a deep, horizontal comradeship.")
+    
+    st.markdown('<p class="sub-header">Noli Me Tangere & El Filibusterismo</p>', unsafe_allow_html=True)
+    st.write("Rizal's novels emerged as the founding texts of Philippine nationalism. Through literary procedure, they conjured up a knowable Filipino community that was entirely separate from Spain.")
+    
+    c1, c2 = st.columns(2)
+    c1.error("**Exposing Institutional Violence**\nThe novels enveloped the reader by exposing the colonial government's evils, disciplinary power, and the violence of the regime.")
+    c2.success("**Ethical Political Decision**\nRizal made the ethical and political decision to speak directly to his fellow Filipinos, challenging colonial assumptions and teaching them a love for their land worth dying for.")
+
+# ==========================================
+# 7. PROPAGANDA & CIVIC ACTION
+# ==========================================
+elif menu == "⚔️ Propaganda & Civic Action":
+    st.markdown('<p class="main-header">⚔️ Propaganda & The Final Break</p>', unsafe_allow_html=True)
+    
+    tab1, tab2 = st.tabs(["📰 La Solidaridad", "🏛️ La Liga Filipina"])
+    
+    with tab1:
+        st.write("In Madrid, Marcelo H. del Pilar established *La Solidaridad*, supported by regular articles from Rizal, Antonio Luna, and Mariano Ponce. However, Rizal eventually clashed with Del Pilar.")
+        st.error("**The Final Break:** Rizal realized that writing articles in Spain was useless. He declared that 'the medicine must be brought near the sick man,' signifying that the true battlefield was the Philippines, not Madrid.")
+        
+    with tab2:
+        st.write("Disillusioned with the Propaganda Movement, Rizal returned to Manila in 1892 and founded a secret civic society: **La Liga Filipina**.")
+        st.write("Its revolutionary goals included:")
+        st.markdown("""
+        1. The unification of the whole Archipelago into a compact, vigorous, and homogeneous body.
+        2. Mutual protection in every want and necessity.
+        3. Defense against all violence and injustice.
+        4. Encouragement of education, agriculture, and commerce.
         """)
 
-# ---------------------------------------------------------
-# LENS 3: Political & Religious Lens
-# ---------------------------------------------------------
-elif lens == "Political & Religious Lens":
-    st.header("⚖️ The Political & Religious Lens: Power and Oppression")
+# ==========================================
+# 8. EXILE, TRIAL, & MARTYRDOM
+# ==========================================
+elif menu == "🕊️ Exile, Trial, & Martyrdom":
+    st.markdown('<p class="main-header">🕊️ Exile, Trial, & Martyrdom</p>', unsafe_allow_html=True)
     
-    st.subheader("The Frailocracy and Instability")
-    st.write("The 19th-century Philippines was defined by the union of Church and State, resulting in the rule of the friars, or 'Frailocracy'. This was compounded by highly unstable and corrupt colonial administrations led by figures like Rafael Izquierdo and Valeriano Weyler.")
+    st.markdown('<p class="sub-header">The Dapitan Interlude (1892 - 1896)</p>', unsafe_allow_html=True)
+    st.write("Immediately after founding La Liga Filipina, Rizal was arrested and exiled to Dapitan in Mindanao. Instead of succumbing to despair, he put his civic ideals into practice. He built a school for boys, established a clinic to treat the poor, designed a waterworks system, and collected biological specimens. Dapitan became a microcosm of his vision for a progressive Filipino nation.")
     
-    st.subheader("The Martyrdom of GOMBURZA")
-    st.write("The Cavite Mutiny led to the tragic execution of three secular priests: Mariano Gomez, Jose Burgos, and Jacinto Zamora (GOMBURZA). This injustice served as a major catalyst for the growth of Philippine nationalism.")
-
-    with st.expander("The Calamba Evictions and Deportations"):
-        st.write("""
-        * Governor-General Valeriano Weyler threw the full weight of his military prestige behind the Dominicans to crush the agrarian resistance in Calamba.
-        * Under Weyler's orders, some 400 tenants were evicted, their houses were dismantled or burned, and 25 individuals—including Rizal's 78-year-old father—were deported to Jolo.
-        * This extreme brutality shattered any remaining illusions Rizal had about obtaining justice from the Spanish courts.
-        """)
-
-# ---------------------------------------------------------
-# LENS 4: Cultural & Educational Lens
-# ---------------------------------------------------------
-elif lens == "Cultural & Educational Lens":
-    st.header("🌴 The Cultural Lens: Romancing Tropicality")
+    st.markdown('<p class="sub-header">Trial and Execution at Bagumbayan</p>', unsafe_allow_html=True)
+    st.write("When the Philippine Revolution broke out in 1896 under the Katipunan, the Spanish authorities wrongly implicated Rizal as the mastermind. Following a mock military trial, he was convicted of rebellion, sedition, and illegal association.")
     
-    st.subheader("Reversing the Imperial Narrative")
-    st.write("Spanish conservatives like Casimiro Herrero argued that the heat of the Torrid Zone caused enervated spirits, lethargy, and a 'lamentable predisposition' to indolence among the natives. In response, Ilustrados in Europe actively romanticized the tropical climate to reverse this racial prejudice.")
-    
-    st.subheader("The 1884 Brindis Speech")
-    st.write("During his famous toast to painters Juan Luna and Felix Resurrección Hidalgo, Rizal argued that the spectacular and terrible phenomena of tropical nature served as the generative fount of their creative genius.")
-    
-    with st.expander("The Demon of Comparisons & Native Indolence"):
-        st.write("""
-        * When Rizal returned to the Philippines in 1887, he suffered under the intense heat and encountered the 'demon of comparisons,' which altered his idealized view of the tropics.
-        * In his essay *Sobre la indolencia de los filipinos*, Rizal conceded that the tropical climate naturally encourages rest and inactivity.
-        * However, he powerfully argued that the true cause of the Filipinos' exaggerated indolence was the disastrous misgovernance, backwardness, and exploitation inflicted by the Spanish colonial state, which robbed the natives of any incentive to work.
-        """)
-
-# ---------------------------------------------------------
-# LENS 5: Nationalism & The Final Break
-# ---------------------------------------------------------
-elif lens == "Nationalism & The Final Break":
-    st.header("🇵🇭 Nationalism, Literature, and La Liga Filipina")
-    
-    st.subheader("Conjuring an Imagined Community")
-    st.write("According to Benedict Anderson, a nation is an 'imagined political community' conceived as a deep, horizontal comradeship. Rizal's novels, *Noli Me Tangere* and *El Filibusterismo*, served as master narratives that conjured this knowable Filipino community into existence.")
-    
-    st.subheader("The Break with Del Pilar")
-    st.write("Rizal eventually clashed with Marcelo H. del Pilar because Rizal realized that political campaigns in Spain (such as through *La Solidaridad*) were a waste of time. He believed that the medicine must be brought near the sick man, and the true field of battle was the Philippines itself.")
-    
-    with st.expander("The Founding of La Liga Filipina"):
-        st.write("""
-        * Disillusioned with the Madrid campaign, Rizal returned to Manila in 1892 to organize *La Liga Filipina*.
-        * The secret society's primary goal was the unification of the whole Archipelago into a compact, vigorous, and homogeneous body.
-        * It also aimed to provide mutual protection against violence, stimulate agriculture and business, and foster the education needed to eventually sustain a mature nation.
-        """)
+    st.markdown('<div class="quote-box">On the morning of December 30, 1896, at the age of 35, Jose Rizal was executed by firing squad at Bagumbayan (now Rizal Park). On the eve of his death, he penned his final masterpiece, "Mi Ultimo Adios" (My Last Farewell), cementing his status as the ultimate martyr of the Philippine Revolution.</div>', unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
-st.caption("Project: Rizal Lens | RZL110_A28 | Developed by Julian David T. Mercado | Promoting an understanding of the 19th-century web of causality.")
+st.markdown("<p style='text-align: center; color: gray;'>Rizal Lens © 2026 | Capstone Integration Project | Built with Streamlit</p>", unsafe_allow_html=True)
